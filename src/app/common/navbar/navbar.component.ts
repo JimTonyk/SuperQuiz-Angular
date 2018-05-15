@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   constructor() { }
+
+  logo = "/assets/logo_superquiz.png";
+
+  user = new User({name:'Bobby', email:'bobleponge@mail.me'});
 
   ngOnInit() {
   }
