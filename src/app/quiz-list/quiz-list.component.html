@@ -1,17 +1,23 @@
 <h1>Liste des quizzes ({{quizList.length}})</h1>
 
+
 <div class="row">
 
   <!-- Ajout de boutons pour dynamiser le tableau -->
-<p>
-  <button class="btn btn-default" (click)="addQuizz()">Ajouter</button>
-  <!-- Methode quick & dirty 
-  <button class="btn btn-default" (click)="quizList.push({title:'Dummy Quiz'})">Ajouter</button>-->
-  <button class="btn btn-default" (click)="deleteQuizz()">Supprimer</button>
-  <!-- Methode quick & dirty 
-  <button class="btn btn-default" (click)="quizList.pop()">Ajouter</button>-->
-</p>
-  
+  <p>
+    <button class="btn btn-default" (click)="addQuizz()">Ajouter</button>
+    <!-- Methode quick & dirty 
+      <button class="btn btn-default" (click)="quizList.push({title:'Dummy Quiz'})">Ajouter</button>-->
+    <button class="btn btn-default" (click)="deleteQuizz()">Supprimer</button>
+    <!-- Methode quick & dirty 
+        <button class="btn btn-default" (click)="quizList.pop()">Ajouter</button>-->
+  </p>
+
+  <!-- Affichage dynamique si aucun quiz est affiché -->
+  <h2 *ngIf="quizList.length === 0">
+    Aucun quiz trouvé
+  </h2>
+
   <!-- Boucle sur la liste des quizzes en appelant une boucle sur la variable quizList -->
   <div class="col-sm-6" *ngFor="let quizz of quizList; let num = index">
     <div class="well" [style.background]="num % 2 === 1 ? 'lightyellow' : 'lightblue'">
@@ -23,7 +29,3 @@
     </div>
   </div>
 </div>
-
-
-
-

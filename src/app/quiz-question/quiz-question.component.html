@@ -1,3 +1,7 @@
+<button (click)="gotoNextQuestionTEMP()">
+  uestion suivante (temporaire)
+</button>
+
 <div class="row">
 
   <div class="col-md-8">
@@ -7,25 +11,32 @@
         <h3 class="panel-title">Question</h3>
       </div>
       <div class="panel-body">
-        <p style="font-size:1.5em;">QUESTION_TITLE</p>
-        <p>(Plusieurs réponses possibles.)</p>
+        <p style="font-size:1.5em;">{{question.title}}</p>
+        <!-- Affichage si plusieurs réponses sont autorisées -->
+        <p *ngIf="question.multipleChoicesAllowed">(Plusieurs réponses possibles.)</p>
       </div>
       <div class="list-group">
-        <a class="list-group-item">
-          <h4 class="list-group-item-heading">QUESTION_CHOICE_1</h4>
-        </a>
-        <a class="list-group-item">
-          <h4 class="list-group-item-heading">QUESTION_CHOICE_2</h4>
-        </a>
-        <a class="list-group-item">
-          <h4 class="list-group-item-heading">QUESTION_CHOICE_3</h4>
+        <!-- Boucle sur le choix des réponses possibles d'ou appel à question.choices -->
+        <a (click)="clickChoice(choice)"
+            [class.active]="answer.hasChoice(choice)"
+            [class.disabled]="isSubmitted"
+            class="list-group-item"
+            *ngFor="let choice of question.choices">
+          <h4 class="list-group-item-heading" (click)="clickChoice(choice)">{{choice.text}}</h4>
         </a>
         <div class="list-group-item pull-right">
-          <button class="btn btn-lg btn-primary">
-            Soumettre
+          <!-- ngClass : change les propriétés de classe sur le style des boutons -->
+          <!-- disabled : propriété pour désactiver le bouton soumettre tant qu'une réponse n'a pas été choisie -->
+          <button class="btn btn-lg" [ngClass]="submitClass" (click)="actionRepondre()" [disabled]="!answer.isAnswered() || isSubmitted">
+            {{submitLabel}}
           </button>
         </div>
       </div>
+    </div>
+
+    <!-- Attention ! S'affiche même si une réponse n'est pas saisie ! Besoin de passer par un flag d'ou le isSubmitted -->
+    <div *ngIf="!answer.isCorrect && isSubmitted">
+      La bonne réponse était {{question.getCorrectChoices()}}
     </div>
 
   </div>
