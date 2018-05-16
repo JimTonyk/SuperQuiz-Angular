@@ -19,13 +19,7 @@
   </h2>
 
   <!-- Boucle sur la liste des quizzes en appelant une boucle sur la variable quizList -->
-  <div class="col-sm-6" *ngFor="let quizz of quizList; let num = index">
-    <div class="well" [style.background]="num % 2 === 1 ? 'lightyellow' : 'lightblue'">
-      <h2>{{num + 1}} - {{quizz.title}}</h2>
-      <p class="lead">{{quizz.description}}</p>
-      <div class="text-right">
-        <a href="" class="btn btn-info btn-lg">Jouer</a>
-      </div>
-    </div>
+  <div class="col-sm-6" *ngFor="let currentQuiz of quizList">
+    <app-quiz-item [quiz]="currentQuiz"></app-quiz-item>
   </div>
 </div>
