@@ -1,0 +1,24 @@
+<h2>{{currentQuiz.title}}</h2>
+<p>{{currentQuiz.description}}</p>
+
+<!-- Test if/else pour afficher la bonne partie du quiz -->
+<p *ngIf="!isStarted; else showNavQuestion"><button class="btn btn-info btn-lg" (click)="startQuiz()">
+  Démarrer le quiz
+</button></p>
+
+<!-- Si clic sur bouton, partie else => Afficher le quiz -->
+<ng-template #showNavQuestion>
+
+  <app-quiz-nav 
+    [quiz]="currentQuiz"
+    [question]="currentQuestion"
+    [answers]="currentAnswers">
+  </app-quiz-nav>
+
+  <app-quiz-question 
+    [question]="currentQuestion"
+    [answer]="currentAnswer"
+    (submit)="reponseRecue($event)">
+  </app-quiz-question>
+
+</ng-template>

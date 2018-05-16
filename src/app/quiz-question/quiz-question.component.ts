@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Question } from '../models/question';
 import { Answer } from '../models/answer';
@@ -11,37 +11,25 @@ import { Choice } from '../models/choice';
 })
 export class QuizQuestionComponent implements OnInit {
   // Question en cours
-  question = new Question({
-    id: 12,
-    title: 'En quelle année AngularJS (première version) est-il sorti ?',
-    choices: [
-      { text: '2008' },
-      { text: '2009', isCorrect: true },
-      { text: '2012' },
-      { text: '2014' }
-    ],
-    explanation: 'La version de 2009 est celle développé initialement par Miško Hevery, qui ne travaillait pas encore chez Google.'
-  });
+  @Input() question: Question;
   // Réponse en cours (réponse "vierge" pour l'instant)
-  answer = new Answer({
-    questionId: 12,
-    multipleChoicesAllowed: false,
-    choices: [
-      {text : '2012'}
-    ]
-  });
+  @Input() answer: Answer;
+  @Output() submit = new EventEmitter<Answer>();
 
   // Si déja répondu, réponse déja soumise
   constructor() {
-    this.isSubmitted = this.answer.isAnswered();
-   }
-
+  }
+  
   ngOnInit() {
+
   }
 
   
-  
-  
+  // Mieux vaut redéfinir les variables à l'initialisation que dans le constructeur (risque d'error undefined si passage par le constructeur)
+  ngOnChanges() {
+    this.isSubmitted = this.answer.isAnswered();
+  }
+
   isSubmitted: boolean; //Pas de clic sur soumettre
   
   clickChoice(choice: Choice) {
@@ -69,6 +57,7 @@ export class QuizQuestionComponent implements OnInit {
   
   actionRepondre() {
     this.isSubmitted = true;
+    this.submit.emit(this.answer);
   }
   
   // Charge une nouvelle question et une nouvelle réponse.
