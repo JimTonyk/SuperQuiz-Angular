@@ -10,6 +10,7 @@ import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 import { QuizItemComponent } from './quiz-item/quiz-item.component';
 import { QuizPlayerComponent } from './quiz-player/quiz-player.component';
 import { QuizNavComponent } from './quiz-nav/quiz-nav.component';
+import { QuizService } from './quiz.service';
 
 @NgModule({
   declarations: [AppComponent,
@@ -22,6 +23,7 @@ import { QuizNavComponent } from './quiz-nav/quiz-nav.component';
     QuizPlayerComponent,
     QuizNavComponent],
   imports: [BrowserModule],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [QuizService]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QUIZZES } from '../data/quizzes';
 import { Quiz } from '../models/quiz';
+import { QuizService } from '../quiz.service';
 
 @Component({
   selector: 'app-quiz-list',
@@ -9,11 +10,13 @@ import { Quiz } from '../models/quiz';
 })
 export class QuizListComponent implements OnInit {
 
-  quizList = QUIZZES;
+  // En local on voit pas la différence, sinon mieux vaut instancier un objet vide qu'undefined => Erreur fatale !
+  quizList: Quiz[] = [];
   
-  constructor() { }
+  constructor(private quizService : QuizService) { }
 
   ngOnInit() {
+    this.quizList = this.quizService.loadQuizzes();
   }
 
   addQuizz(){
