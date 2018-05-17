@@ -42,9 +42,8 @@ export class QuizPlayerComponent implements OnInit {
       // Charge le quiz que l'utilisateur a cliqué
       // Astuce : l'id du quiz viendra de l'URL
       const quizId = Number(param.get('quizId'));
-      const quiz = this.quizService.loadQuiz(quizId);
+      this.quizService.loadQuiz(quizId).subscribe(data => this.quizStateManager.setQuiz(data));
       // Pousse le quiz chargé dans l'observable
-      this.quizStateManager.setQuiz(quiz);
     })
   }
 

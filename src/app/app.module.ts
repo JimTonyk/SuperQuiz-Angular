@@ -8,6 +8,7 @@ import { FooterComponent } from './common/footer/footer.component';
 import { QuizModule } from './quiz/quiz.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './common/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 
 //Pour tout assigner à un tableau et l'appeler une fois rempli dans l'importation (plus élégant)
 const routes: Routes= [
@@ -26,8 +27,13 @@ const routes: Routes= [
     BrowserModule,
     QuizModule,
     //Début des redirections vers l'écran d'accueil et la page login
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
   bootstrap: [AppComponent],
+  //Ajout de l'adresse en constante dure prête à utiliser
+  providers: [
+    {provide: 'JSON_SERVER_URL', useValue: 'http://localhost:3004',}
+  ]
 })
 export class AppModule { }

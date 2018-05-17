@@ -1,5 +1,9 @@
-<h2>{{currentQuiz.title}}</h2>
-<p>{{currentQuiz.description}}</p>
+<!-- Si test non vide non réalisé, erreur d'affichage car contenu inexistant -->
+<ng-container *ngIf="currentQuiz|async">
+  <h2>{{(currentQuiz|async).title}}</h2>
+  <p>{{(currentQuiz|async).description}}</p>
+</ng-container>
+
 
 <!-- Test if/else pour afficher la bonne partie du quiz -->
 <p *ngIf="!isStarted; else showNavQuestion">
