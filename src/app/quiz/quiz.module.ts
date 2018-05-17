@@ -6,10 +6,18 @@ import { QuizItemComponent } from './quiz-item/quiz-item.component';
 import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 import { QuizListComponent } from './quiz-list/quiz-list.component';
 import { QuizService } from './quiz.service';
+import { LoginComponent } from '../common/login/login.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {path: 'quizzes', component: QuizListComponent},
+  {path: 'quiz/:quizId', component: QuizPlayerComponent}
+];
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ],
   declarations: [
     QuizListComponent,
@@ -19,6 +27,6 @@ import { QuizService } from './quiz.service';
     QuizNavComponent
   ],
   exports:[QuizPlayerComponent],
-  providers: [QuizService]
+  providers: [QuizService],
 })
 export class QuizModule { }

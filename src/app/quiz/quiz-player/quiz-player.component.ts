@@ -6,6 +6,7 @@ import { QuizService } from '../quiz.service';
 import { Quiz } from '../../models/quiz';
 import { Question } from '../../models/question';
 import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-player',
@@ -16,37 +17,38 @@ import { Observable } from 'rxjs/Observable';
 export class QuizPlayerComponent implements OnInit {
 
   //Avec un appel aux services, les classes injectées sont observées. Le QSM est la tour de contrôle
-  currentQuiz : Observable<Quiz>;
-  currentQuestion : Observable<Question>;
-  currentAnswer : Observable<Answer>;
+  currentQuiz: Observable<Quiz>;
+  currentQuestion: Observable<Question>;
+  currentAnswer: Observable<Answer>;
   currentAnswers: Observable<AnswersState>;
 
   isStarted = false;
 
-  constructor(private quizService : QuizService,
-              private quizStateManager : QuizStateManager) { 
+  constructor(private quizService: QuizService,
+    private quizStateManager: QuizStateManager,
+    private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
     // Initialise les propriétés du composant à partir du QSM
-    this.currentQuiz= this.quizStateManager.getCurrentQuiz();
+    this.currentQuiz = this.quizStateManager.getCurrentQuiz();
     this.currentQuestion = this.quizStateManager.getCurrentQuestion();
     this.currentAnswer = this.quizStateManager.getCurrentAnswer();
     this.currentAnswers = this.quizStateManager.getCurrentAnswers();
-    
-    // Charge le quiz que l'utilisateur a cliqué
-    // Astuce : l'id du quiz viendra de l'URL
-    const quizId = 32;
-    const quiz = this.quizService.loadQuiz(quizId);
 
-    // Pousse le quiz chargé dans l'observable
-    this.quizStateManager.setQuiz(quiz);
-
-
+    //Récupération de l'identité du quiz pour charger le bon quiz avec son numéro
+    this.route.paramMap.subscribe((param: ParamMap) => {
+      // Charge le quiz que l'utilisateur a cliqué
+      // Astuce : l'id du quiz viendra de l'URL
+      const quizId = Number(param.get('quizId'));
+      const quiz = this.quizService.loadQuiz(quizId);
+      // Pousse le quiz chargé dans l'observable
+      this.quizStateManager.setQuiz(quiz);
+    })
   }
 
-  
+
   startQuiz() {
     this.isStarted = true;
     // TODO: Utilise le QuizStateManager pour aller à la première question
@@ -57,17 +59,17 @@ export class QuizPlayerComponent implements OnInit {
     // vérifie si le programme passe par cette méthode
     console.log('Enregistrée');
     // TODO: sauvegarder la reponse dans le service QuizStateManager
-    this.quizStateManager.addAnswer(answer); 
+    this.quizStateManager.addAnswer(answer);
   }
 
-  gotoNextQuestion(){
+  gotoNextQuestion() {
     // TODO: Aller à la question suivante avec QuizStateManager.
     this.quizStateManager.gotoNextQuestion();
   }
 
-  gotoPreviousQuestion(){
+  gotoPreviousQuestion() {
     // TODO: Aller à la question précédente avec QuizStateManager
     this.quizStateManager.gotoPreviousQuestion();
   }
-  
+
 }

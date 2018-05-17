@@ -2,6 +2,6 @@
   <h2>{{quiz.title}}</h2>
   <p class="lead">{{quiz.description}}</p>
   <div class="text-right">
-    <a href="#" class="btn btn-info btn-lg">Jouer</a>
+    <a [routerLink]="['/quiz', quiz.id]" class="btn btn-info btn-lg">Jouer</a>
   </div>
 </div>

@@ -17,10 +17,10 @@ export class NavbarComponent implements OnInit {
   logo = "/assets/logo_superquiz.png";
   user = new User({name:'Bobby', email:'bobleponge@mail.me'});
   navItems: NavItem[] = [
-    {text:'Accueil', path:'#'},
-    {text:'Quizzes', path:'#'},
+    {text:'Accueil', path:'home'},
+    {text:'Quizzes', path:'quizzes'},
     {text:'Admin', path:'#'},
-    {text:'Login', path:'#'}
+    {text:'Login', path:'login'}
   ];
   
   constructor() { }

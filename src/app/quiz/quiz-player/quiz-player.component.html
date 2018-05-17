@@ -2,27 +2,22 @@
 <p>{{currentQuiz.description}}</p>
 
 <!-- Test if/else pour afficher la bonne partie du quiz -->
-<p *ngIf="!isStarted; else showNavQuestion"><button class="btn btn-info btn-lg" (click)="startQuiz()">
-  Démarrer le quiz
-</button></p>
+<p *ngIf="!isStarted; else showNavQuestion">
+  <button class="btn btn-info btn-lg" (click)="startQuiz()">
+    Démarrer le quiz
+  </button>
+</p>
 
 <!-- Si clic sur bouton, partie else => Afficher le quiz -->
 <ng-template #showNavQuestion>
 
   <!-- Indiquer les contenus observables avec | async 
        /!\ Jamais sur une méthode sinon erreur de compilation -->
-  <app-quiz-nav 
-    [quiz]="currentQuiz | async"
-    [question]="currentQuestion | async"
-    [answers]="currentAnswers | async"
-    (next)="gotoNextQuestion()"
+  <app-quiz-nav [quiz]="currentQuiz | async" [question]="currentQuestion | async" [answers]="currentAnswers | async" (next)="gotoNextQuestion()"
     (previous)="gotoPreviousQuestion()">
   </app-quiz-nav>
 
-  <app-quiz-question 
-    [question]="currentQuestion | async"
-    [answer]="currentAnswer | async"
-    (submit)="reponseRecue($event)">
+  <app-quiz-question [question]="currentQuestion | async" [answer]="currentAnswer | async" (submit)="reponseRecue($event)">
   </app-quiz-question>
 
 </ng-template>
