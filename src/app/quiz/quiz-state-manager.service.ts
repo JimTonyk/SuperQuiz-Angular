@@ -10,9 +10,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
 // Models
-import { Quiz } from './models/quiz';
-import { Question } from './models/question';
-import { Answer } from './models/answer';
+import { Quiz } from '../models/quiz';
+import { Question } from '../models/question';
+import { Answer } from '../models/answer';
 
 
 /**

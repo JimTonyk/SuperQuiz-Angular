@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Question } from '../models/question';
-import { Answer } from '../models/answer';
-import { Choice } from '../models/choice';
+import { Question } from '../../models/question';
+import { Answer } from '../../models/answer';
+import { Choice } from '../../models/choice';
 
 @Component({
   selector: 'app-quiz-question',

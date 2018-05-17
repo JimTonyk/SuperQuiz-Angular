@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { QUIZZES } from '../data/quizzes';
-import { Answer } from '../models/answer';
+import { QUIZZES } from '../../data/quizzes';
+import { Answer } from '../../models/answer';
 import { AnswersState, QuizStateManager } from '../quiz-state-manager.service';
 import { QuizService } from '../quiz.service';
-import { Quiz } from '../models/quiz';
-import { Question } from '../models/question';
+import { Quiz } from '../../models/quiz';
+import { Question } from '../../models/question';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
