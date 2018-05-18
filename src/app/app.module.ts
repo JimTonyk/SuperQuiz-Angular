@@ -9,12 +9,14 @@ import { QuizModule } from './quiz/quiz.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './common/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth.guard';
 
 //Pour tout assigner à un tableau et l'appeler une fois rempli dans l'importation (plus élégant)
 const routes: Routes= [
   {path: 'home', component: HomeComponent},
-  //{path: 'login', component: LoginComponent},
-  { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
+  {path: 'login', component: LoginComponent},
+  {path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule', canActivate: [AuthGuard] },
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ]
 
@@ -23,6 +25,7 @@ const routes: Routes= [
     NavbarComponent,
     HomeComponent,
     FooterComponent,
+    LoginComponent
     ],
   imports: [
     BrowserModule,
@@ -34,7 +37,9 @@ const routes: Routes= [
   bootstrap: [AppComponent],
   //Ajout de l'adresse en constante dure prête à utiliser
   providers: [
-    {provide: 'JSON_SERVER_URL', useValue: 'http://localhost:3004',}
+    {provide: 'JSON_SERVER_URL', useValue: 'http://localhost:3004',},
+    AuthService,
+    AuthGuard
   ]
 })
 export class AppModule { }
