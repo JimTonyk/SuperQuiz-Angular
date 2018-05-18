@@ -1,6 +1,11 @@
 <form novalidate [formGroup]="quizForm" (ngSubmit)="saveQuiz()">
 
-  <!-- Vérification que le champ est bien rempli si non modifié pour la première fois-->
+  <!-- Cette forme générique remplace le bout de code commenté ci dessous -->
+  <app-field label="Titre" [control]="quizForm.get('quizTitle')">
+    <input type="text" class="form-control" placeholder="Titre" formControlName="quizTitle">
+  </app-field>
+
+  <!-- Vérification que le champ est bien rempli si non modifié pour la première fois
   <div class="form-group" [class.has-error]="quizForm.get('quizTitle').dirty && quizForm.get('quizTitle').invalid">
     <label class="control-label">Titre*</label>
     <input type="text" class="form-control" placeholder="Titre" formControlName="quizTitle">
@@ -8,23 +13,21 @@
       <div *ngIf="quizForm.get('quizTitle').hasError('required')">
         Ce champ doit être renseigné
       </div>
-      <!-- Si le champ fait plus de 20 caractères affichage de ce message d'erreur -->
+      /!\ Si le champ fait plus de 20 caractères affichage de ce message d'erreur
       <div *ngIf="quizForm.get('quizTitle').hasError('maxlength')">
         Ce champ doit faire au plus {{quizForm.get('quizTitle').getError('maxlength').requiredLength}} caractères (espaces compris). <br>
         Actuellement, cette chaîne fait {{quizForm.get('quizTitle').getError('maxlength').actualLength}} caractères.
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="form-group">
-    <label class="control-label">Description</label>
-    <textarea class="form-control" placeholder="Description" rows="3" formControlName="quizDescription"></textarea>
-  </div>
+  <app-field label="Description" [control]="quizForm.get('quizDescription')">
+    <textarea class="form-control" placeholder="Description" formControlName="quizDescription" rows="3"></textarea>
+  </app-field>
 
-  <div class="form-group">
-    <label class="control-label">Peut ré-essayer les questions</label>
+  <app-field label="Peut ré-essayer les questions" [control]="quizForm.get('quizMultipleChoices')">
     <input type="checkbox" formControlName="quizMultipleChoices">
-  </div>
+  </app-field>
 
   <!-- Si une erreur apparait, afficher un message d'erreur -->
   <button type="submit" class="btn btn-primary" [disabled]="quizForm.invalid">Enregistrer</button>

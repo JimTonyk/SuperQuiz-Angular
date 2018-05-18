@@ -190,8 +190,8 @@
     },
     {
       "id": 571,
-      "title": "Nouveau test",
-      "description": "Prototype",
+      "title": "Test",
+      "description": "Ca devrait marcher normalement",
       "canRetryQuestion": false,
       "questions": []
     }
