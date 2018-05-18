@@ -1,21 +1,33 @@
-<form novalidate>
+<form novalidate [formGroup]="quizForm" (ngSubmit)="saveQuiz()">
 
-  <div class="form-group">
+  <!-- Vérification que le champ est bien rempli si non modifié pour la première fois-->
+  <div class="form-group" [class.has-error]="quizForm.get('quizTitle').dirty && quizForm.get('quizTitle').invalid">
     <label class="control-label">Titre*</label>
-    <input type="text" class="form-control" placeholder="Titre">
+    <input type="text" class="form-control" placeholder="Titre" formControlName="quizTitle">
+    <div class="help-block" *ngIf="quizForm.get('quizTitle').dirty && quizForm.get('quizTitle').invalid">
+      <div *ngIf="quizForm.get('quizTitle').hasError('required')">
+        Ce champ doit être renseigné
+      </div>
+      <!-- Si le champ fait plus de 20 caractères affichage de ce message d'erreur -->
+      <div *ngIf="quizForm.get('quizTitle').hasError('maxlength')">
+        Ce champ doit faire au plus {{quizForm.get('quizTitle').getError('maxlength').requiredLength}} caractères (espaces compris). <br>
+        Actuellement, cette chaîne fait {{quizForm.get('quizTitle').getError('maxlength').actualLength}} caractères.
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
     <label class="control-label">Description</label>
-    <textarea class="form-control" placeholder="Description" rows="3"></textarea>
+    <textarea class="form-control" placeholder="Description" rows="3" formControlName="quizDescription"></textarea>
   </div>
 
   <div class="form-group">
     <label class="control-label">Peut ré-essayer les questions</label>
-    <input type="checkbox">
+    <input type="checkbox" formControlName="quizMultipleChoices">
   </div>
 
-  <button type="submit" class="btn btn-primary">Enregistrer</button>
+  <!-- Si une erreur apparait, afficher un message d'erreur -->
+  <button type="submit" class="btn btn-primary" [disabled]="quizForm.invalid">Enregistrer</button>
   <a routerLink="..">Annuler</a>
 
 </form>

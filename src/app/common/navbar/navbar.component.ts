@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   navItems: NavItem[] = [
     {text:'Accueil', path:'home'},
     {text:'Quizzes', path:'quizzes'},
-    {text:'Admin', path:'#'},
+    {text:'Admin', path:'admin'},
     {text:'Login', path:'login'}
   ];
   

@@ -43,6 +43,8 @@ export class QuizService {
 
   /**
    * Save the given quiz (INSERT or UPDATE).
+   * Si le quiz existe et dispose d'un ID => UPDATE (d'où put)
+   * Sinon crée un nouveau quiz (post)
    */
   saveQuiz(quiz: Quiz): Observable<any> {
     const url = `${this.baseUrl}/quizzes` + (quiz.id ? `/${quiz.id}` : '');

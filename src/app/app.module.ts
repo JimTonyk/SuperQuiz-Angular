@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 const routes: Routes= [
   {path: 'home', component: HomeComponent},
   //{path: 'login', component: LoginComponent},
+  { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ]
 

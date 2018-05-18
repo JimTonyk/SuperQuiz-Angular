@@ -189,29 +189,11 @@
       "description": "Alors comme ça Game of Thrones n\"a pas de secrets pour vous ?"
     },
     {
-      "id": 569,
-      "title": "ddsd",
-      "description": "",
+      "id": 571,
+      "title": "Nouveau test",
+      "description": "Prototype",
       "canRetryQuestion": false,
-      "questions": [
-        {
-          "multipleChoicesAllowed": false,
-          "id": 1,
-          "questionType": "multiple_choice",
-          "title": "Q1",
-          "explanation": "expl",
-          "choices": [
-            {
-              "text": "A",
-              "isCorrect": false
-            },
-            {
-              "text": "B",
-              "isCorrect": true
-            }
-          ]
-        }
-      ]
+      "questions": []
     }
   ],
   "submissions": [],
